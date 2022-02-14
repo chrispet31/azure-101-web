@@ -1,15 +1,14 @@
-name: CI
+name: Blob storage website CI
 
 on:
-  push:
+    push:
+        branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
+    - uses: azure/login@v1
       with:
-        node-version: 14.x
-    - run: npm ci
-    - run: npm run build
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
